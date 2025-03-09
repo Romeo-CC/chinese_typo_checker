@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from transformers import AdamW
 
-from models.networks import HZTypoChecker
+from models.networks import HZTypoCheckerNet
 from utils.datahelper import StreamingTextDataset
 from tqdm import tqdm
 import numpy as np
@@ -16,7 +16,7 @@ def timestamp():
     return datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
 
 
-def save_model(model: HZTypoChecker, save_path: str):
+def save_model(model: HZTypoCheckerNet, save_path: str):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     model.corrector.save_pretrained(f"{save_path}/mlm")
@@ -59,7 +59,7 @@ def train(
         log_dir, batch_size=4
     ):
     
-    model = HZTypoChecker(model_name=model_name)
+    model = HZTypoCheckerNet(model_name=model_name)
     model = model.to(device)
 
     optimizer = AdamW(model.parameters(), lr=learning_rate)
