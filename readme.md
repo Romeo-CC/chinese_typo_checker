@@ -55,3 +55,6 @@ print(ck_out.mod_tokens)
 ```
 
 ## References
+
+BERT [paper](https://arxiv.org/abs/1810.04805] [code](https://github.com/huggingface/transformers/tree/main/src/transformers/models/bert)
+ELECTRA [paper](https://arxiv.org/abs/2003.10555) [code](https://github.com/huggingface/transformers/tree/main/src/transformers/models/electra)
