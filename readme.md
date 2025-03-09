@@ -12,11 +12,10 @@ Therefore, techniques for detecting and correcting typos in Chinese text are hig
 graph LR
     
     A@{ shape: lean-r, label: "Input Chinese Text" } --> B@{ shape: rect, label: "Tokenizer" }
-    
     B -->|"input_ids<br>attention_mask"| C@{ shape: procs, label: "Stacked Encoder Layers" }
     subgraph Model
-    C -->|"last hidden state"| D@{ shape: rect, label: "MaskedLM Head for Typo Correction" }
-    C -->|"last hidden state"| E@{ shape: rect, label: "Token CLS Head for Typo Detection" }
+    C -->|"last hidden state"| D@{ shape: rect, label: "MaskedLM Head" }
+    C -->|"last hidden state"| E@{ shape: rect, label: "Token CLS Head" }
     end
     D --> F@{ shape: stadium, label: "Typo Correction" }
     E --> G@{ shape: stadium, label: "Typo Detection" }   
