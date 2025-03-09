@@ -6,9 +6,10 @@ In Chinese text scenarios, typos are inevitable due to the input method, as most
 Therefore, techniques for detecting and correcting typos in Chinese text are highly valuable and in demand. This repository aims to build a Chinese typo checker by leveraging the capabilities of masked language models like BERT.
 
 
+## Method
+
 ```mermaid
-%%{init: {'theme':'default'}}%%
-flowchart LR
+graph LR
     
     A@{ shape: lean-r, label: "Input Chinese Text" } --> B@{ shape: rect, label: "Tokenizer" }
     
