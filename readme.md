@@ -16,7 +16,6 @@ graph LR
     C -->|"last hidden state"| D@{ shape: rect, label: "MaskedLM Head" }
     C -->|"last hidden state"| E@{ shape: rect, label: "Token CLS Head" }
     end
-    D --> F@{ shape: stadium, label: "Typo Correction" }
-    E --> G@{ shape: stadium, label: "Typo Detection" } 
-
+    D --> F(["Typo Correction"])
+    E --> G(["Typo Detection"]) 
 ```
