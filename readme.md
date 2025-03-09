@@ -10,7 +10,6 @@ Therefore, techniques for detecting and correcting typos in Chinese text are hig
 
 ```mermaid
 graph LR
-    
     A@{ shape: lean-r, label: "Input Chinese Text" } --> B@{ shape: rect, label: "Tokenizer" }
     B -->|"input_ids<br>attention_mask"| C@{ shape: procs, label: "Stacked Encoder Layers" }
     subgraph Model
@@ -18,5 +17,6 @@ graph LR
     C -->|"last hidden state"| E@{ shape: rect, label: "Token CLS Head" }
     end
     D --> F@{ shape: stadium, label: "Typo Correction" }
-    E --> G@{ shape: stadium, label: "Typo Detection" }   
+    E --> G@{ shape: stadium, label: "Typo Detection" } 
+
 ```
