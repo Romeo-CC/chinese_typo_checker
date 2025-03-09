@@ -28,7 +28,7 @@ from checker import HZTypoChecker
 
 tokenizer_name = "data/bert"
 
-model_name = "where you download the model weights"
+model_name = "where you downloaded the model weights"
 
 
 ckecker = HZTypoChecker(model_name, tokenizer_name)
