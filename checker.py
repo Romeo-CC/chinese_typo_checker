@@ -15,19 +15,22 @@ class CheckerOutput(OrderedDict):
 
 
 class HZTypoChecker(object):
-    def __init__(self, model_path: str, tokenizer_path: str):
+    def __init__(self, model_path: str, tokenizer_path: str, device: torch.device):
 
         self.model = self.load_model(model_path)
-        self.model.eval()
         self.tokenizer: BertTokenizer = BertTokenizer.from_pretrained(tokenizer_path)
-    
+        self.device = device
+        self.model = self.model.to(self.device)
+        self.model.eval()
+        
+
 
     def load_model(self, model_path):
         mlm_name = f"{model_path}/mlm"
         cls_name = f"{model_path}/detector.pth"
         model = HZTypoCheckerNet(mlm_name)
-        model.detector.load_state_dict(torch.load(cls_name))
-
+        model.detector.load_state_dict(torch.load(cls_name, map_location=torch.device("cpu")))
+        
         return model
     
 
@@ -36,11 +39,13 @@ class HZTypoChecker(object):
         input_ids = token_output.input_ids
         attention_mask = token_output.attention_mask
         
+        input_ids = input_ids.to(self.device)
+        attention_mask = attention_mask.to(self.device)
+        
         mlm_pred, cls_pred = self.model(input_ids, attention_mask)
         
         mlm_pred_ids = torch.argmax(mlm_pred, dim=-1)
-        cls_pred = torch.gt(cls_pred.sigmoid(), 0.5).long()
-
+        cls_pred = torch.gt(cls_pred.sigmoid(), 0.5).long().tolist()
         raw_tokens = self.tokenizer.convert_ids_to_tokens(input_ids[0])
         mod_tokens = self.tokenizer.convert_ids_to_tokens(mlm_pred_ids[0])
         cls_pred = cls_pred[0]
