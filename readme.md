@@ -1,0 +1,1 @@
+# Chinese Hanzi Typo Checker
